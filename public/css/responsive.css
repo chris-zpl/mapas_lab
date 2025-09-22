@@ -1,0 +1,181 @@
+@media (max-width: 767px) {
+  .form-editar,
+  .form-cadastrar {
+    max-width: 400px !important;
+  }
+  .form-editar .flex-group,
+  .form-cadastrar .flex-group {
+    flex-direction: column !important;
+    margin: 0;
+  }
+  .form-editar .form-group,
+  .form-cadastrar .form-group {
+    margin-left: 0;
+    margin-right: 0;
+  }
+  .legenda-table {
+    flex-direction: column !important;
+  }
+  .legenda-table .info-modelos {
+    justify-content: center !important;
+  }
+  .legenda-table .info-status {
+    justify-content: center !important;
+  }
+  .table-edit-responsive input {
+    padding: 2px;
+  }
+  .table-edit-responsive tr,
+  .table-edit-responsive th,
+  .table-edit-responsive td {
+    text-align: center;
+    font-size: smaller;
+  }
+  .table-edit-responsive .form-control {
+    font-size: 10px;
+  }
+  .table-edit-responsive .form-select {
+    font-size: 10px;
+  }
+  .table-edit-responsive .error {
+    margin: 0;
+    font-size: 8px;
+    color: red;
+    text-align: center;
+  }
+  .cadastrar p,
+  .editar p {
+    text-align: center;
+  }
+  .menu-links {
+    font-size: 13px !important;
+    margin: auto 8px auto 8px !important;
+  }
+}
+@media (max-width: 991px) {
+  .sub-menu-link ul {
+    margin: 0 0.5rem !important;
+  }
+  .troca-patrimonio {
+    flex-direction: column;
+    max-width: 70%;
+    align-items: center;
+  }
+  .troca-patrimonio .setas {
+    margin: 1.5rem 0;
+    transform: rotate(90deg);
+  }
+  .salas-container-search {
+    width: auto;
+  }
+  .navbar-header {
+    flex-direction: column;
+  }
+  .menu {
+    padding: 20px 10px !important;
+  }
+  .menu .menu-principal {
+    display: flex !important;
+    flex-direction: column !important;
+  }
+  .menu .links {
+    height: auto !important;
+  }
+  .titulo-admin {
+    display: flex;
+    justify-content: center !important;
+    /* margin-top: 20px; */
+  }
+  .titulo-hr {
+    margin: 1rem 110px 1rem 110px;
+  }
+  .form-cadastrar .submit-cadastrar {
+    width: auto !important;
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+  }
+  .form-editar .submit-editar {
+    width: auto !important;
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+  }
+}
+@media (max-width: 1118px) {
+  .botoes-grid {
+    align-items: center !important;
+  }
+  .mapa {
+    display: flex;
+    flex-direction: column !important;
+    align-items: center;
+  }
+  .mapa .mapa-grid {
+    margin-bottom: 40px;
+  }
+  #tabela-info {
+    margin-top: 10px;
+  }
+}
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  #conteudo-mapa {
+    border: none !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+  }
+  .print-config {
+    width: 100%;
+    /* border-style: double; */
+    background-color: #fff !important;
+  }
+  .mapa {
+    display: flex;
+    flex-direction: row !important;
+    align-items: baseline !important;
+  }
+  .mapa .mapa-grid {
+    margin: 0;
+    border: 1px solid #e9e9e9;
+    border-radius: 5px;
+  }
+  .mapa .mapa-grid img {
+    margin-top: 0;
+    width: 40px;
+    height: 40px;
+  }
+  .mapa .mapa-grid .titulo-mapa {
+    display: block;
+    margin: 0;
+    font-size: large !important;
+  }
+  .mapa .mapa-grid .estilo-mapa {
+    border: none;
+    box-shadow: none;
+    padding: 6px;
+    margin-right: 0;
+  }
+  body {
+    zoom: 0.87;
+    margin: 0;
+    padding: 0;
+  }
+  .table > :not(caption) > * > * {
+    padding: 1px;
+  }
+  .table,
+  .table-responsive {
+    width: 100%;
+    max-height: -moz-fit-content;
+    max-height: fit-content;
+    box-shadow: none !important;
+  }
+  tr,
+  td,
+  th {
+    font-size: 11.1px;
+  }
+}/*# sourceMappingURL=responsive.css.map */
