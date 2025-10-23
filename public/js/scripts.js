@@ -55,8 +55,7 @@ async function mapaDosPatrimonios(salaUrl, numeroDeElementos) {
   gridContainer = document.getElementById(`grid-${bloco}-${sala}`);
   criarGridTemplate(gridContainer);
 
-  // Se o primeiro elemento for diferente de "Nenhum patrimônio encontrado"
-  // Renderiza os botões e os patrimônios
+  /* Se o primeiro elemento for diferente de "Nenhum patrimônio encontrado", renderiza os botões e os patrimônios */
   if (
     linhasTabela[0].cells[0].textContent !== "Nenhum patrimônio encontrado."
   ) {
@@ -97,7 +96,7 @@ async function mapaDosPatrimonios(salaUrl, numeroDeElementos) {
   if (botaoSalvarEditar) {
     botaoSalvarEditar.addEventListener("click", async () => {
       if (!modoEdicao) {
-        // Modo: Editar → Salvar
+        // Modo: Editar -> Salvar
         modoEdicao = true;
         botaoSalvarEditar.textContent = "Salvar posições";
         gridContainer.classList.add("sem-selecao");
@@ -108,9 +107,7 @@ async function mapaDosPatrimonios(salaUrl, numeroDeElementos) {
           valueRows,
           posicoes: structuredClone(posicoes),
         };
-        document
-          .getElementById("botoesCancelaSalvaPosicoes")
-          .insertAdjacentHTML("beforeend", renderCancelarButton());
+        document.getElementById("botoesCancelaSalvaPosicoes").insertAdjacentHTML("beforeend", renderCancelarButton());
         controlGrids.innerHTML = renderButtons();
         carregarButtons(valueCols, valueRows);
 
@@ -168,7 +165,7 @@ async function mapaDosPatrimonios(salaUrl, numeroDeElementos) {
           });
         });
       } else {
-        // Modo: Salvar → Editar novamente
+        // Modo: Salvar -> Editar novamente
         const botaoCancelar = document.getElementById("botaoCancelarPosicoes");
         posicoes = coletarPosicoes(celulas);
 
@@ -754,6 +751,22 @@ async function mapaDosPatrimonios(salaUrl, numeroDeElementos) {
   }
 }
 
+async function paraCopia(valores, msgExito){
+  // Junta os valores com ";" exceto o último
+  const resultado = valores.join(";\n") + "\n";
+
+  // Inicializa a variável vazia para a mensagem
+  let mensagem = "";
+
+  try {
+    await navigator.clipboard.writeText(resultado);
+    mensagem = msgExito;
+  } catch (err) {
+    mensagem = '<span class="text-body"><span class="fw-bold text-danger m-0">Erro: </span>Não foi possível realizar a cópia.</span>';
+  }
+
+}
+
 // Função para copiar o texto da coluna máquina
 async function copiarColunaMaquina() {
   // Seleciona a tabela
@@ -771,23 +784,15 @@ async function copiarColunaMaquina() {
       !celulaModelo.innerText.startsWith("Projetor") &&
       !celulaMaquina.innerText.startsWith("-")
     ) {
-      valores.push("• " + celulaMaquina.innerText.trim());
+      valores.push(celulaMaquina.innerText.trim());
     }
   }
-  // Junta os valores com ";" exceto o último
-  const resultado = valores.join(";\n") + "\n";
 
   // Inicializa a variável vazia para a mensagem
-  let mensagem = "";
+  let mensagem = '<span class="text-body">Todos os patrimônios da coluna <b>"Máquina"</b> foram copiados para a área de transferência!</span><p class="fs-xsmall text-danger m-0">* Impressoras e projetores foram ignorados.s</p>';
 
-  try {
-    await navigator.clipboard.writeText(resultado);
-    mensagem =
-      "<span class='text-body'>Todos os patrimônios da coluna <b>'Máquina'</b> foram copiados para a área de transferência!</span><p class='fs-xsmall text-danger m-0'>* Impressoras e projetores foram ignorados.</p>";
-  } catch (err) {
-    mensagem =
-      "<span class='text-body'><span class='fw-bold text-danger m-0'>Erro: </span>Os patrimônios da coluna <b>'Máquina'</b> não puderam ser copiados.</span>";
-  }
+  // Inicia a função para mostrar a mensagem
+  await paraCopia(valores, mensagem);
 
   // Exibe o a mensagem em Toast
   mostrarToast(mensagem);
@@ -801,24 +806,15 @@ async function copiarSoftwares() {
   spans.forEach((span) => {
     let texto = span.innerText.trim();
     if (texto) {
-      valores.push("• " + texto);
+      valores.push(texto);
     }
   });
 
-  // Junta os valores com ";" exceto o último
-  const resultado = valores.join(";\n") + "\n";
-
   // Inicializa a variável vazia para a mensagem
-  let mensagem = "";
+  let mensagem = "<span class='text-body'>Todos os softwares foram copiados para a área de transferência!</span>";
 
-  try {
-    await navigator.clipboard.writeText(resultado);
-    mensagem =
-      "<span class='text-body'>Todos os softwares foram copiados para a área de transferência!</span>";
-  } catch (err) {
-    mensagem =
-      "<span class='text-body'><span class='fw-bold text-danger m-0'>Erro: </span>Não foi possível copiar os softwares.</span>";
-  }
+  // Inicia a função para mostrar a mensagem
+  await paraCopia(valores, mensagem);
 
   // Exibe o a mensagem em Toast
   mostrarToast(mensagem);
@@ -1853,8 +1849,7 @@ function exportarParaExcel() {
   //Titulos
   const salaTitulo = document.getElementById("titulo_sala").innerText.trim();
   // Extrai só o numero e bloco da sala. Ex: "212.04/F"
-  const codigoSala =
-    salaTitulo.match(/\d{3}(?:\.\d{2})?(?:\/[A-Z])?/i)?.[0] || "sala";
+  const codigoSala = salaTitulo.match(/\d{3}(?:\.\d{2})?(?:\/[A-Z])?/i)?.[0] || "sala";
   // Extrai número do prédio (ex: 12)
   const numeroPredio = salaTitulo.match(/Pr[eé]dio\s*(\d+)/i)?.[1] || "0";
   // Substitui "/" por "-" caso haja na sala. Ex -> "212.04-F"
